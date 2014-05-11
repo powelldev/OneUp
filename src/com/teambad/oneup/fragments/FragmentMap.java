@@ -38,7 +38,8 @@ public class FragmentMap extends Fragment implements OnMarkerClickListener{
 	public boolean onMarkerClick(Marker marker) {
 		double markerPosLat = marker.getPosition().latitude;
 		double markerPosLng = marker.getPosition().longitude;
-		// find
+		// find latlng in list
+		// loadChallengeFragment(markerPosLat, markerPosLng)
 		return false;
 	}
 }
