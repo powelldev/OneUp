@@ -8,10 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.teambad.oneup.HomeActivity;
-import com.teambad.oneup.HomeActivity.FragmentTypes;
 import com.teambad.oneup.R;
+import com.teambad.oneup.UserId;
+import com.teambad.oneup.HomeActivity.FragmentTypes;
 
 public class FragmentLogin extends Fragment implements View.OnClickListener{
 	
@@ -32,7 +34,13 @@ public class FragmentLogin extends Fragment implements View.OnClickListener{
 
 	@Override
 	public void onClick(View v) {
-		((HomeActivity) getActivity()).loadFragment(FragmentTypes.MAP);
+		String name = username.getEditableText().toString();
+		Toast.makeText(getActivity(), name, Toast.LENGTH_LONG).show();
+		for(UserId u: ((HomeActivity) getActivity()).users){
+			if(u.userName.contains(name)){
+				((HomeActivity) getActivity()).loadFragment(FragmentTypes.CHOICE);
+			}
+		}
 	}
 
 	class VerifyUser extends AsyncTask<String, Void, Void> {

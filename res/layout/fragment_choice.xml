@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <Button
+        android:id="@+id/fragment_choice_map_btn"
+        android:layout_alignParentTop="true"
+        android:layout_width="match_parent"
+        android:text="See 1UPs near you"
+        android:layout_height="48dp"
+        />
+    <Button
+        android:id="@+id/fragment_choice_event_btn"
+        android:text="Create 1UP"
+        android:layout_below="@id/fragment_choice_map_btn"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        />
+
+</RelativeLayout>

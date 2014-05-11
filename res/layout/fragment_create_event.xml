@@ -3,11 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <TextView
-        android:layout_centerInParent="true"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Create Event" />
     <EditText
         android:id="@+id/fragment_create_event_url"
         android:layout_width="match_parent"

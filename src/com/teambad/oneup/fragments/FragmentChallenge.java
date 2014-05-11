@@ -4,20 +4,29 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.Toast;
 
+import com.dolby.dap.DolbyAudioProcessing;
+import com.dolby.dap.DolbyAudioProcessing.PROFILE;
+import com.dolby.dap.OnDolbyAudioProcessingEventListener;
 import com.google.android.youtube.player.YouTubeInitializationResult;
 import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayer.OnInitializedListener;
 import com.google.android.youtube.player.YouTubePlayer.Provider;
 import com.google.android.youtube.player.YouTubePlayerView;
 import com.teambad.oneup.Challenge;
+import com.teambad.oneup.HomeActivity;
+import com.teambad.oneup.HomeActivity.FragmentTypes;
 import com.teambad.oneup.R;
 
 public class FragmentChallenge extends Fragment implements
-		OnInitializedListener {
+		OnInitializedListener, OnClickListener {
 	Challenge challenge;
+
+	DolbyAudioProcessing dap;
 
 	public void setChallenge(Challenge challenge) {
 		this.challenge = challenge;
@@ -44,6 +53,8 @@ public class FragmentChallenge extends Fragment implements
 			// premature initialization
 		}
 		// else:
+		
+		((Button) root.findViewById(R.id.fragment_challenge_oneup_btn)).setOnClickListener(this);
 
 		return root;
 	}
@@ -58,6 +69,29 @@ public class FragmentChallenge extends Fragment implements
 	@Override
 	public void onInitializationSuccess(Provider provider,
 			YouTubePlayer player, boolean arg2) {
+			dap = DolbyAudioProcessing.getDolbyAudioProcessing(getActivity(), DolbyAudioProcessing.PROFILE.MOVIE, new OnDolbyAudioProcessingEventListener() {
+
+			@Override
+			public void onDolbyAudioProcessingClientConnected() {
+				dap.setEnabled(true);
+			}
+
+			@Override
+			public void onDolbyAudioProcessingClientDisconnected() {
+				dap.setEnabled(false);
+			}
+
+			@Override
+			public void onDolbyAudioProcessingEnabled(boolean arg0) {
+			}
+
+			@Override
+			public void onDolbyAudioProcessingProfileSelected(PROFILE arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
 		player.cueVideo(parseVideoIdFromUrl());
 		player.play();
 	}
@@ -65,6 +99,15 @@ public class FragmentChallenge extends Fragment implements
 	private String parseVideoIdFromUrl() {
 		String url = challenge.getUrl();
 		String id = (String) url.subSequence(url.lastIndexOf("=")+1, url.length());
+		if (id.contains("/")) {
+			id = (String) url.subSequence(url.lastIndexOf("/")+1, url.length());
+		}
+		Toast.makeText(getActivity(), id, Toast.LENGTH_LONG).show();
 		return id;
+	}
+
+	@Override
+	public void onClick(View v) {
+		((HomeActivity) getActivity()).loadFragment(FragmentTypes.CREATE);
 	}
 }
