@@ -1,5 +1,6 @@
 package com.teambad.oneup;
 
+import com.teambad.oneup.fragments.FragmentChallenge;
 import com.teambad.oneup.fragments.FragmentCreateEvent;
 import com.teambad.oneup.fragments.FragmentLogin;
 
@@ -11,6 +12,7 @@ public class HomeActivity extends Activity {
 	
 	FragmentLogin fragmentLogin = new FragmentLogin();
 	FragmentCreateEvent fragmentCreateEvent = new FragmentCreateEvent();
+	FragmentChallenge fragmentChallenge = new FragmentChallenge();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

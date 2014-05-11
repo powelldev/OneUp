@@ -8,13 +8,12 @@ import android.view.ViewGroup;
 
 import com.teambad.oneup.R;
 
-public class FragmentCreateEvent extends Fragment{
+public class FragmentChallenge extends Fragment{
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View root = inflater.inflate(R.layout.fragment_create_event, null);
+		View root = inflater.inflate(R.layout.fragment_challenge, null);
 		return root;
 	}
-
 }
